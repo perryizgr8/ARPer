@@ -1,0 +1,14 @@
+﻿<Window x:Class="ARPer.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ARPer"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="400" Width="600">
+    <Grid>
+        <TextBox x:Name="attackMe" HorizontalAlignment="Center" Height="23" TextWrapping="Wrap" Text="IP to attack" VerticalAlignment="Center" Width="120" Foreground="Gray" ForceCursor="True" HorizontalContentAlignment="Center" GotFocus="attackMe_GotFocus"/>
+        <Button x:Name="button" Content="Attack!" HorizontalAlignment="Center" VerticalAlignment="Center" Width="76" Margin="258,201,258,144" Height="24"/>
+
+    </Grid>
+</Window>
