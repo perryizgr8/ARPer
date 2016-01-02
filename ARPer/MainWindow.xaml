@@ -5,10 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ARPer"
         mc:Ignorable="d"
-        Title="MainWindow" Height="400" Width="600">
+        Title="MainWindow" Height="400" Width="600" Loaded="Window_Loaded">
     <Grid>
         <TextBox x:Name="attackMe" HorizontalAlignment="Center" Height="23" TextWrapping="Wrap" Text="IP to attack" VerticalAlignment="Center" Width="120" Foreground="Gray" ForceCursor="True" HorizontalContentAlignment="Center" GotFocus="attackMe_GotFocus"/>
-        <Button x:Name="button" Content="Attack!" HorizontalAlignment="Center" VerticalAlignment="Center" Width="76" Margin="258,201,258,144" Height="24"/>
+        <Button x:Name="button" Content="Attack!" HorizontalAlignment="Center" VerticalAlignment="Center" Width="76" Margin="258,201,258,144" Height="24" Click="button_Click"/>
 
     </Grid>
 </Window>
