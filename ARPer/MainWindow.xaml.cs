@@ -43,7 +43,21 @@ namespace ARPer
         {
             if (isIpValid(attackMe.Text))
             {
-                sendArp(attackMe.Text); 
+                string mac = "";
+                string ip = "";
+                if (radioButton1.IsChecked == true)
+                {
+                    //fuzzy logic
+                    mac = "FCB0C4A24E50";
+                    ip = "192.168.1.1";
+                }
+                else if (radioButton2.IsChecked == true)
+                {
+                    //this better work
+                    mac = "C83A35074168";
+                    ip = "192.168.0.1";
+                }
+                sendArp(attackMe.Text, mac, ip); 
             }
             else
             {
@@ -77,9 +91,11 @@ namespace ARPer
             return true;
         }
 
-        private void sendArp(string text)
+        private void sendArp(string attackIP, string routerMAC, string routerIP)
         {
-            throw new NotImplementedException();
+            string myMAC = "A0A8CD9ACBAD";
+            string arpSenderMAC = "0A5A7B303F71";
+            throw new NotImplementedException();            
         }
     }
 }
