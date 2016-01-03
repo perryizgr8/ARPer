@@ -43,7 +43,7 @@ namespace ARPer
 
         private void attackMe_GotFocus(object sender, RoutedEventArgs e)
         {
-            attackMe.Foreground = Brushes.Black;
+            //attackMe.Foreground = Brushes.Black;
             if (attackMe.Text == "IP to attack")
             {
                 attackMe.Text = "";
@@ -57,7 +57,7 @@ namespace ARPer
 
         private void button_Click(object sender, RoutedEventArgs e)
         {
-            progress.Text = "Validating...";
+            status.Text = "Validating...";
             if (isIpValid(attackMe.Text))
             {
                 string mac = ""; //TODO: make this customizable
@@ -99,19 +99,19 @@ namespace ARPer
                 bg.ProgressChanged += new ProgressChangedEventHandler(
                     delegate (object o, ProgressChangedEventArgs args)
                     {
-                        progress.Text = args.ProgressPercentage.ToString() + "% done";
+                        progressBar.Value = args.ProgressPercentage;
                     });
                 bg.RunWorkerCompleted += new RunWorkerCompletedEventHandler(
                     delegate (object o, RunWorkerCompletedEventArgs args)
                     {
-                        progress.Text = "All done!";
+                        status.Text = "All done!";
                     });
                 List<object> arguments = new List<object>();
                 arguments.Add(attackMe.Text);
                 arguments.Add(mac);
                 arguments.Add(ip);
                 arguments.Add(numPacks);
-                progress.Text = "Attacking!";
+                status.Text = "Attacking!";
                 bg.RunWorkerAsync(arguments);
                 //sendArp(attackMe.Text, mac, ip); 
             }

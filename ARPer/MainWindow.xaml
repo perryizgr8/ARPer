@@ -5,21 +5,43 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ARPer"
         mc:Ignorable="d"
-        Title="MainWindow" Height="400" Width="600" Loaded="Window_Loaded">
-    <Grid>
-        <Border BorderBrush="#FF959595" BorderThickness="1" HorizontalAlignment="Left" Height="39" Margin="188,189,0,0" VerticalAlignment="Top" Width="212">
-            <TextBlock x:Name="textBlock" TextWrapping="Wrap" Text="WiFi network" Margin="16,4,0,6" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+        Title="ARPer" Height="400" Width="600" Loaded="Window_Loaded" ResizeMode="NoResize" UseLayoutRounding="False">
+    <Window.Resources>
+        <Style TargetType="{x:Type Button}">
+            <Setter Property="Foreground" Value="#FF4ED600"/>
+            <Setter Property="Background" Value="Black"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#FF4ED600"/>
+                    <Setter Property="Foreground" Value="Black" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+    <Grid Background="Black">
+        <Border BorderBrush="#FF959595" BorderThickness="1" HorizontalAlignment="Left" Height="39" Margin="176,189,0,0" VerticalAlignment="Top" Width="248">
+            <TextBlock x:Name="textBlock" TextWrapping="Wrap" Text="WiFi network" Margin="16,4,0,6" VerticalAlignment="Center" HorizontalAlignment="Left" Foreground="#FF4ED600" FontFamily="Consolas"/>
         </Border>
 
-        <TextBox x:Name="attackMe" HorizontalAlignment="Center" Height="23" TextWrapping="Wrap" Text="IP to attack" VerticalAlignment="Center" Width="120" Foreground="Gray" ForceCursor="True" HorizontalContentAlignment="Center" GotFocus="attackMe_GotFocus" VerticalContentAlignment="Center" Margin="236,161,236,185" />
-        <Button x:Name="button" Content="Attack!" HorizontalAlignment="Center" VerticalAlignment="Center" Width="76" Margin="258,277,258,68" Height="24" Click="button_Click"/>
-        <RadioButton x:Name="radioButton2" Content="this__better__work" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="288,207,0,0" Width="108" GroupName="network" IsChecked="True"/>
-        <RadioButton x:Name="radioButton1" Content="fuzzy logic" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="288,194,0,0" RenderTransformOrigin="-0.048,0.511" GroupName="network"/>
-        <TextBlock x:Name="progress" HorizontalAlignment="Center" Text="Hit Attack!" VerticalAlignment="Top" Margin="196,84,196,0" FontSize="30" Width="200" TextAlignment="Center" ScrollViewer.VerticalScrollBarVisibility="Disabled"/>
-        <Border BorderBrush="#FF959595" BorderThickness="1" HorizontalAlignment="Left" Height="39" Margin="188,232,0,0" VerticalAlignment="Top" Width="212">
-            <TextBlock x:Name="textBlock1" TextWrapping="Wrap" Text="Number of packets" Margin="16,1,0,4" VerticalAlignment="Center" HorizontalAlignment="Left" Width="68"/>
+        <TextBox x:Name="attackMe" HorizontalAlignment="Center" Height="23" TextWrapping="Wrap" Text="IP to attack" VerticalAlignment="Center" Width="120" Foreground="#FF4ED600" ForceCursor="True" HorizontalContentAlignment="Center" GotFocus="attackMe_GotFocus" VerticalContentAlignment="Center" Margin="236,161,236,185" Background="Black" AllowDrop="True" FontFamily="Consolas" />
+        <Button x:Name="button" Content="Attack!" HorizontalAlignment="Center" VerticalAlignment="Center" Width="120" Margin="237,278,237,50" Height="43" Click="button_Click" FontFamily="Consolas" FontSize="20" BorderBrush="{x:Null}" BorderThickness="1"/>
+        <RadioButton x:Name="radioButton2" Content="this__better__work" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="288,207,0,0" Width="126" GroupName="network" IsChecked="True" FontFamily="Consolas" Foreground="#FF4ED600" Background="Black" BorderBrush="#FF4ED600"/>
+        <RadioButton x:Name="radioButton1" Content="fuzzy logic" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="288,194,0,0" RenderTransformOrigin="-0.048,0.511" GroupName="network" Foreground="#FF4ED600" FontFamily="Consolas" Background="Black" BorderBrush="#FF4ED600"/>
+        <TextBlock x:Name="status" HorizontalAlignment="Center" Text="Hit Attack!" VerticalAlignment="Top" Margin="201,84,193,0" FontSize="30" Width="200" TextAlignment="Center" ScrollViewer.VerticalScrollBarVisibility="Disabled" FontFamily="Consolas" Foreground="#FF4ED600"/>
+        <Border BorderBrush="#FF959595" BorderThickness="1" HorizontalAlignment="Left" Height="39" Margin="176,232,0,0" VerticalAlignment="Top" Width="248">
+            <TextBlock x:Name="textBlock1" TextWrapping="Wrap" Text="Number of packets" Margin="16,1,0,4" VerticalAlignment="Center" HorizontalAlignment="Left" Width="68" Foreground="#FF4ED600" FontFamily="Consolas"/>
         </Border>
-        <TextBox x:Name="numPackets" HorizontalAlignment="Center" Height="22" TextWrapping="Wrap" Text="1" VerticalAlignment="Center" Width="60" Margin="293,240,239,107" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+        <TextBox x:Name="numPackets" HorizontalAlignment="Center" Height="22" TextWrapping="Wrap" Text="1" VerticalAlignment="Center" Width="60" Margin="293,240,239,107" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Background="Black" Foreground="#FF4ED600" FontFamily="Consolas"/>
+        <ProgressBar x:Name="progressBar" HorizontalAlignment="Left" Height="18" VerticalAlignment="Top" Width="200" Margin="196,131,0,0" Background="Black"/>
 
     </Grid>
 </Window>
