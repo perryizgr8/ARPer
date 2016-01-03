@@ -35,6 +35,7 @@ namespace ARPer
     /// </summary>
     public partial class MainWindow : Window
     {
+        BackgroundWorker bg;
         public MainWindow()
         {
             InitializeComponent();
@@ -80,7 +81,7 @@ namespace ARPer
                     numPackets.SelectAll();
                     return;
                 }
-                BackgroundWorker bg = new BackgroundWorker();
+                bg = new BackgroundWorker();
                 bg.WorkerReportsProgress = true;
                 bg.DoWork += new DoWorkEventHandler(sendArp);//attackMe.Text, mac, ip));
                     //delegate (object o, DoWorkEventArgs args)
@@ -98,13 +99,12 @@ namespace ARPer
                 bg.ProgressChanged += new ProgressChangedEventHandler(
                     delegate (object o, ProgressChangedEventArgs args)
                     {
-                        progress.Text = args.ProgressPercentage.ToString();
+                        progress.Text = args.ProgressPercentage.ToString() + "% done";
                     });
                 bg.RunWorkerCompleted += new RunWorkerCompletedEventHandler(
                     delegate (object o, RunWorkerCompletedEventArgs args)
                     {
                         progress.Text = "All done!";
-                        //progress.Width = 
                     });
                 List<object> arguments = new List<object>();
                 arguments.Add(attackMe.Text);
@@ -196,6 +196,7 @@ namespace ARPer
                 for (int i = 0; i < reps; i++)
                 {
                     communicator.SendPacket(packet);
+                    bg.ReportProgress((i * 100)/reps);
                 }
             }
         }
