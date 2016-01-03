@@ -36,12 +36,12 @@
         <Button x:Name="button" Content="Attack!" HorizontalAlignment="Center" VerticalAlignment="Center" Width="120" Margin="237,278,237,50" Height="43" Click="button_Click" FontFamily="Consolas" FontSize="20" BorderBrush="{x:Null}" BorderThickness="1"/>
         <RadioButton x:Name="radioButton2" Content="this__better__work" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="288,207,0,0" Width="126" GroupName="network" IsChecked="True" FontFamily="Consolas" Foreground="#FF4ED600" Background="Black" BorderBrush="#FF4ED600"/>
         <RadioButton x:Name="radioButton1" Content="fuzzy logic" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="288,194,0,0" RenderTransformOrigin="-0.048,0.511" GroupName="network" Foreground="#FF4ED600" FontFamily="Consolas" Background="Black" BorderBrush="#FF4ED600"/>
-        <TextBlock x:Name="status" HorizontalAlignment="Center" Text="Hit Attack!" VerticalAlignment="Top" Margin="201,84,193,0" FontSize="30" Width="200" TextAlignment="Center" ScrollViewer.VerticalScrollBarVisibility="Disabled" FontFamily="Consolas" Foreground="#FF4ED600"/>
+        <TextBlock x:Name="status" HorizontalAlignment="Center" Text="Hit Attack!" VerticalAlignment="Top" Margin="176,84,170,0" FontSize="30" Width="248" TextAlignment="Center" ScrollViewer.VerticalScrollBarVisibility="Disabled" FontFamily="Consolas" Foreground="#FF4ED600"/>
         <Border BorderBrush="#FF959595" BorderThickness="1" HorizontalAlignment="Left" Height="39" Margin="176,232,0,0" VerticalAlignment="Top" Width="248">
             <TextBlock x:Name="textBlock1" TextWrapping="Wrap" Text="Number of packets" Margin="16,1,0,4" VerticalAlignment="Center" HorizontalAlignment="Left" Width="68" Foreground="#FF4ED600" FontFamily="Consolas"/>
         </Border>
         <TextBox x:Name="numPackets" HorizontalAlignment="Center" Height="22" TextWrapping="Wrap" Text="1" VerticalAlignment="Center" Width="60" Margin="293,240,239,107" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Background="Black" Foreground="#FF4ED600" FontFamily="Consolas"/>
-        <ProgressBar x:Name="progressBar" HorizontalAlignment="Left" Height="18" VerticalAlignment="Top" Width="200" Margin="196,131,0,0" Background="Black"/>
+        <ProgressBar x:Name="progressBar" HorizontalAlignment="Left" Height="18" VerticalAlignment="Top" Width="248" Margin="176,131,0,0" Background="Black" Foreground="#FF4ED600"/>
 
     </Grid>
 </Window>

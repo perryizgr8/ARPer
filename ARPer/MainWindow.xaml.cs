@@ -105,6 +105,7 @@ namespace ARPer
                     delegate (object o, RunWorkerCompletedEventArgs args)
                     {
                         status.Text = "All done!";
+                        progressBar.Value = 100;
                     });
                 List<object> arguments = new List<object>();
                 arguments.Add(attackMe.Text);
@@ -119,6 +120,7 @@ namespace ARPer
             {
                 attackMe.Focus();
                 attackMe.SelectAll();
+                status.Text = "Invalid IP";
             }
         }
 
