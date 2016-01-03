@@ -12,6 +12,19 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using PcapDotNet.Base;
+using PcapDotNet.Core;
+using PcapDotNet.Packets;
+using PcapDotNet.Packets.Arp;
+using PcapDotNet.Packets.Dns;
+using PcapDotNet.Packets.Ethernet;
+using PcapDotNet.Packets.Gre;
+using PcapDotNet.Packets.Http;
+using PcapDotNet.Packets.Icmp;
+using PcapDotNet.Packets.Igmp;
+using PcapDotNet.Packets.IpV4;
+using PcapDotNet.Packets.IpV6;
+using PcapDotNet.Packets.Transport;
 
 namespace ARPer
 {
@@ -43,8 +56,8 @@ namespace ARPer
         {
             if (isIpValid(attackMe.Text))
             {
-                string mac = "";
-                string ip = "";
+                string mac = ""; //TODO: make this customizable
+                string ip = ""; //TODO: this too
                 if (radioButton1.IsChecked == true)
                 {
                     //fuzzy logic
@@ -95,6 +108,23 @@ namespace ARPer
         {
             string myMAC = "A0A8CD9ACBAD";
             string arpSenderMAC = "0A5A7B303F71";
+            IList<LivePacketDevice> allDevices = LivePacketDevice.AllLocalMachine;
+            if (allDevices.Count == 0)
+            {
+                Console.WriteLine("No interfaces found! Make sure WinPcap is installed.");
+                throw new Exception(); //TODO: catch exception and show error
+            }
+            for (int i = 0; i != allDevices.Count; ++i) //TODO: show this in GUI somehow
+            {
+                LivePacketDevice device = allDevices[i];
+                Console.Write((i + 1) + ". " + device.Name);
+                if (device.Description != null)
+                    Console.WriteLine(" (" + device.Description + ")");
+                else
+                    Console.WriteLine(" (No description available)");
+            }
+            int deviceIndex = 2; //TODO: make this choosable
+
             throw new NotImplementedException();            
         }
     }

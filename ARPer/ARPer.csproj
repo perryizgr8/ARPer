@@ -35,6 +35,22 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="PcapDotNet.Base, Version=1.0.3.20967, Culture=neutral, PublicKeyToken=4b6f3e583145a652, processorArchitecture=MSIL">
+      <HintPath>..\packages\Pcap.Net.x86.1.0.3\lib\net40\PcapDotNet.Base.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="PcapDotNet.Core, Version=1.0.3.20978, Culture=neutral, PublicKeyToken=4b6f3e583145a652, processorArchitecture=x86">
+      <HintPath>..\packages\Pcap.Net.x86.1.0.3\lib\net40\PcapDotNet.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="PcapDotNet.Core.Extensions, Version=1.0.3.20980, Culture=neutral, PublicKeyToken=4b6f3e583145a652, processorArchitecture=x86">
+      <HintPath>..\packages\Pcap.Net.x86.1.0.3\lib\net40\PcapDotNet.Core.Extensions.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="PcapDotNet.Packets, Version=1.0.3.20968, Culture=neutral, PublicKeyToken=4b6f3e583145a652, processorArchitecture=MSIL">
+      <HintPath>..\packages\Pcap.Net.x86.1.0.3\lib\net40\PcapDotNet.Packets.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
@@ -86,6 +102,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
