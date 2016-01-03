@@ -11,7 +11,7 @@
             <TextBlock x:Name="textBlock" TextWrapping="Wrap" Text="WiFi network" Margin="16,4,0,6" VerticalAlignment="Center" HorizontalAlignment="Left"/>
         </Border>
 
-        <TextBox x:Name="attackMe" HorizontalAlignment="Center" Height="23" TextWrapping="Wrap" Text="IP to attack" VerticalAlignment="Center" Width="120" Foreground="Gray" ForceCursor="True" HorizontalContentAlignment="Center" GotFocus="attackMe_GotFocus" VerticalContentAlignment="Center" Margin="236,161,236,185" TextChanged="attackMe_TextChanged"/>
+        <TextBox x:Name="attackMe" HorizontalAlignment="Center" Height="23" TextWrapping="Wrap" Text="IP to attack" VerticalAlignment="Center" Width="120" Foreground="Gray" ForceCursor="True" HorizontalContentAlignment="Center" GotFocus="attackMe_GotFocus" VerticalContentAlignment="Center" Margin="236,161,236,185" />
         <Button x:Name="button" Content="Attack!" HorizontalAlignment="Center" VerticalAlignment="Center" Width="76" Margin="258,277,258,68" Height="24" Click="button_Click"/>
         <RadioButton x:Name="radioButton2" Content="this__better__work" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="288,207,0,0" Width="108" GroupName="network" IsChecked="True"/>
         <RadioButton x:Name="radioButton1" Content="fuzzy logic" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="288,194,0,0" RenderTransformOrigin="-0.048,0.511" GroupName="network"/>
